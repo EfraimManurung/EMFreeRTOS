@@ -4,6 +4,9 @@
    
    Efraim Manurung, 25th January 2024
    Version 1.0
+
+   Efraim Manurung, 26th January 2024
+   Version 1.1 : Added different task for turning ON and OFF LED
 */
 
 
@@ -30,7 +33,15 @@ void toggleLED(void *parameter) {
   }
 }
 
-
+// Second task: also blink an LED but with different delay
+void toggleLED1(void *parameter) {
+  while(1) {
+    digitalWrite(led_pin, HIGH);
+    vTaskDelay(350 / portTICK_PERIOD_MS);
+    digitalWrite(led_pin, LOW);
+    vTaskDelay(350 / portTICK_PERIOD_MS);
+  }
+}
 
 void setup() {
 
@@ -50,6 +61,15 @@ void setup() {
   // If this was vanilla FreeRTOS, you'd want to call vTaskStartScheduler() in
   // main after setting up your tasks.
 
+  // For the second task
+  xTaskCreatePinnedToCore(
+      toggleLED1,
+      "Toggle LED1",
+      1024,
+      NULL,
+      1,
+      NULL,
+      app_cpu);
 }
 
 void loop() {
