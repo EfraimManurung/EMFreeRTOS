@@ -61,8 +61,14 @@ void readSerial(void *parameter) {
   char buf[buf_len];
   uint8_t idx = 0;
 
+  /*
+  `memset` is a function from the C standard library that sets a block of memory to a specific value. In this code, it is used
+  to clear the buffer `buf` by setting all its elements to 0. This ensures that buffer is empty before storing new
+  input data from the serial port.
+  */
+
   // Clear whole buffer
-  memset(buf, 0, buf_len);
+  memset(buf, 0, buf_len); 
 
   // Loop forever
   while(1) {
@@ -73,7 +79,12 @@ void readSerial(void *parameter) {
 
       // Update delay variable and reset buffer if we get a newline character
       if (c == '\n') {
-        led_delay = atoi(buf);
+        /*
+        `atoi` stands for "ASCII to integer". It is a function that converts a string representing a number into
+        an integer. In this code, it is used to convert the string in the buffer `buf` to an integer,
+        which is then used to set the `led_delay` variable.
+        */
+        led_delay = atoi(buf); 
         Serial.print("Updated LED delay to: ");
         Serial.println(led_delay);
         memset(buf, 0, buf_len);
