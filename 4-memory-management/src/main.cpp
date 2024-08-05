@@ -37,7 +37,7 @@ void testTask(void *parameter) {
 
     int *ptr = (int*)pvPortMalloc(1024 * sizeof(int));
 
-    // One wat to prevent heap overflow is to check the malloc output
+    // One way to prevent heap overflow is to check the malloc output
     if (ptr == NULL) {
       Serial.println("Not enough heap.");
     } else {
