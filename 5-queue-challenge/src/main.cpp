@@ -117,7 +117,8 @@ void doCLI(void *parameters) {
 
     // See if there's a message in the queue (do not block)
     if (xQueueReceive(msg_queue, (void *)&receive_message, 0) == pdTRUE) {
-      Serial.print(receive_message.body);
+      // Serial.print("DEBUG EFRAIM : ");
+      Serial.println(receive_message.body);
       Serial.println(receive_message.count);
     }
 
